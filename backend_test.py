@@ -222,7 +222,29 @@ def run_tests():
     
     # Run the tests
     runner = unittest.TextTestRunner()
-    runner.run(test_suite)
+    result = runner.run(test_suite)
+    
+    # Print summary
+    print("\n=== TEST SUMMARY ===")
+    print(f"Total tests: {result.testsRun}")
+    print(f"Failures: {len(result.failures)}")
+    print(f"Errors: {len(result.errors)}")
+    
+    # Print failures and errors
+    if result.failures:
+        print("\n=== FAILURES ===")
+        for test, error in result.failures:
+            print(f"Test: {test}")
+            print(f"Error: {error}")
+    
+    if result.errors:
+        print("\n=== ERRORS ===")
+        for test, error in result.errors:
+            print(f"Test: {test}")
+            print(f"Error: {error}")
+    
+    return len(result.failures) == 0 and len(result.errors) == 0
 
 if __name__ == "__main__":
-    run_tests()
+    success = run_tests()
+    sys.exit(0 if success else 1)
