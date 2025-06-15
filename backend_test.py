@@ -5,6 +5,8 @@ import time
 from datetime import datetime, timedelta
 import unittest
 import os
+import sys
+import traceback
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -19,6 +21,7 @@ with open('/app/frontend/.env', 'r') as f:
 
 # API base URL
 API_URL = f"{BACKEND_URL}/api"
+print(f"Using API URL: {API_URL}")
 
 # JWT Secret for creating test tokens
 JWT_SECRET = os.environ.get('SECRET_KEY', 'your-super-secret-jwt-key-here-make-it-very-long-and-random-for-production')
