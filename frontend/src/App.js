@@ -1137,6 +1137,8 @@ const Section = ({ id, title, subtitle, backgroundImage, videos, gradient }) => 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('masterclasses');
   const location = useLocation();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.pathname === '/') {
@@ -1170,7 +1172,7 @@ const Navigation = () => {
 
   return (
     <nav className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="glass-nav flex space-x-1">
+      <div className="glass-nav flex space-x-1 items-center">
         {[
           { id: 'masterclasses', label: 'Masterclasses' },
           { id: 'careerpaths', label: 'Career Paths' },
@@ -1188,6 +1190,28 @@ const Navigation = () => {
             {label}
           </button>
         ))}
+        
+        {/* Profile/Login Button */}
+        {isAuthenticated ? (
+          <button
+            onClick={() => navigate('/profile')}
+            className="ml-4 px-4 py-3 rounded-lg text-sm font-medium bg-blue-500/20 text-blue-300 hover:bg-blue-500/30 border border-blue-400/50 transition-all duration-300 flex items-center"
+          >
+            <img 
+              src={user?.picture} 
+              alt="Profile" 
+              className="w-6 h-6 rounded-full mr-2"
+            />
+            {user?.name?.split(' ')[0] || 'Profile'}
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('/login')}
+            className="ml-4 px-4 py-3 rounded-lg text-sm font-medium bg-green-500/20 text-green-300 hover:bg-green-500/30 border border-green-400/50 transition-all duration-300"
+          >
+            Sign In
+          </button>
+        )}
       </div>
     </nav>
   );
