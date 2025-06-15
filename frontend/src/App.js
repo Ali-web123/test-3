@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation, useParams } from "react-router-dom";
 import "./App.css";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import AuthCallback from "./components/AuthCallback";
+import LoginButton from "./components/LoginButton";
+import ProfilePage from "./components/ProfilePage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
