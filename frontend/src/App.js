@@ -1255,41 +1255,54 @@ const HomePage = () => {
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/masterclasses" element={
-            <CoursePage
-              type="masterclasses"
-              title="UIS Masterclasses"
-              subtitle="Deep-dive into advanced topics with industry experts. Comprehensive courses designed for professionals looking to master complex skills and cutting-edge technologies."
-              backgroundImage="https://images.pexels.com/photos/2330137/pexels-photo-2330137.jpeg"
-              gradient="135deg, rgba(79, 70, 229, 0.4) 0%, rgba(147, 51, 234, 0.4) 100%"
+    <AuthProvider>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginButton />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
+            <Route path="/auth/error" element={<LoginButton />} />
+            <Route 
+              path="/profile" 
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              } 
             />
-          } />
-          <Route path="/careerpaths" element={
-            <CoursePage
-              type="careerpaths"
-              title="UIS Career Paths"
-              subtitle="Structured learning journeys to advance your career. From entry-level to leadership roles, discover the skills and knowledge needed to achieve your professional goals."
-              backgroundImage="https://images.unsplash.com/photo-1522211988038-6fcbb8c12c7e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwyfHxsZWFybmluZ3xlbnwwfHx8YmxhY2t8MTc0OTc0MzU4NHww&ixlib=rb-4.1.0&q=85"
-              gradient="135deg, rgba(16, 185, 129, 0.4) 0%, rgba(59, 130, 246, 0.4) 100%"
-            />
-          } />
-          <Route path="/crashcourses" element={
-            <CoursePage
-              type="crashcourses"
-              title="UIS Student Crash Courses"
-              subtitle="Quick, intensive courses for rapid skill acquisition. Perfect for students who need to learn essential concepts quickly and efficiently."
-              backgroundImage="https://images.unsplash.com/photo-1494178270175-e96de2971df9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwzfHxsZWFybmluZ3xlbnwwfHx8YmxhY2t8MTc0OTc0MzU4NHww&ixlib=rb-4.1.0&q=85"
-              gradient="135deg, rgba(245, 101, 101, 0.4) 0%, rgba(251, 191, 36, 0.4) 100%"
-            />
-          } />
-          <Route path="/:category/:courseId" element={<CourseDetail />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+            <Route path="/masterclasses" element={
+              <CoursePage
+                type="masterclasses"
+                title="UIS Masterclasses"
+                subtitle="Deep-dive into advanced topics with industry experts. Comprehensive courses designed for professionals looking to master complex skills and cutting-edge technologies."
+                backgroundImage="https://images.pexels.com/photos/2330137/pexels-photo-2330137.jpeg"
+                gradient="135deg, rgba(79, 70, 229, 0.4) 0%, rgba(147, 51, 234, 0.4) 100%"
+              />
+            } />
+            <Route path="/careerpaths" element={
+              <CoursePage
+                type="careerpaths"
+                title="UIS Career Paths"
+                subtitle="Structured learning journeys to advance your career. From entry-level to leadership roles, discover the skills and knowledge needed to achieve your professional goals."
+                backgroundImage="https://images.unsplash.com/photo-1522211988038-6fcbb8c12c7e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwyfHxsZWFybmluZ3xlbnwwfHx8YmxhY2t8MTc0OTc0MzU4NHww&ixlib=rb-4.1.0&q=85"
+                gradient="135deg, rgba(16, 185, 129, 0.4) 0%, rgba(59, 130, 246, 0.4) 100%"
+              />
+            } />
+            <Route path="/crashcourses" element={
+              <CoursePage
+                type="crashcourses"
+                title="UIS Student Crash Courses"
+                subtitle="Quick, intensive courses for rapid skill acquisition. Perfect for students who need to learn essential concepts quickly and efficiently."
+                backgroundImage="https://images.unsplash.com/photo-1494178270175-e96de2971df9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2Mzl8MHwxfHNlYXJjaHwzfHxsZWFybmluZ3xlbnwwfHx8YmxhY2t8MTc0OTc0MzU4NHww&ixlib=rb-4.1.0&q=85"
+                gradient="135deg, rgba(245, 101, 101, 0.4) 0%, rgba(251, 191, 36, 0.4) 100%"
+              />
+            } />
+            <Route path="/:category/:courseId" element={<CourseDetail />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 
